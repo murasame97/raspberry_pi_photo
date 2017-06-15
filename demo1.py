@@ -18,27 +18,8 @@ GPIO.setup(LED,GPIO.OUT)
 BUZZER=22
 GPIO.setup(BUZZER,GPIO.OUT)
 
-while True:
-	if ( GPIO.input(10) == False ):
-		os.system('date')
-		print("Button is pressed.")
-				
-		print("The last number in id is 8.")
-		idLED(5.0,8.0)
-		
-		print("Count 15 seconds.")
-		fifteen()
-		
-		buzzer(3)
-		
-		while True:
-			if RCtime(LDR)>300:
-				GPIO.output(LED,GPIO.HIGH)	
-			
-	else:
-		os.system('clear')
-		print ("press the button..")
 
+		
 def idLED(second,number):
 	duration=second/number/2
 	
@@ -51,10 +32,9 @@ def idLED(second,number):
 		time.sleep(duration)
 
 def fifteen():
-	idLED(10,10)
-	
+	idLED(10.0,10)
 	for i in range(10):
-		idLED(1.0,i*2)
+		idLED(1.0,(i+1)*2)
 
 def buzzer (second):
 	for i in range(second*5):
@@ -72,3 +52,23 @@ def RCtime (RCpin):
 	while (GPIO.input(RCpin) == GPIO.LOW):
 		reading += 1 
 	return reading
+	
+
+while True:
+        if ( GPIO.input(10) == False ):
+                os.system('date')
+                print("Button is pressed.")
+                print("The last number in id is 8.")
+                idLED(5.0,8)
+		print("Count 15 seconds.")
+                fifteen()
+                buzzer(3)
+
+                while True:
+                        if RCtime(LDR)>300:
+                                GPIO.output(LED,GPIO.HIGH)
+
+        else:
+                os.system('clear')
+                print ("press the button..")
+
